@@ -1,22 +1,37 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
+
+func sayNamaste(n string) {
+	fmt.Printf("Namaste %v !\n", n)
+}
+
+func sayFeriBhetaula(n string) {
+	fmt.Printf("Feri bhetaula %v \n", n)
+}
+
+func cycleNames(n []string, f func(string)) {
+	for _, v := range n {
+		f(v)
+	}
+}
+
+func circleArea(r float64) float64 {
+	return math.Pi * r * r
+}
 
 func main() {
+	// sayNamaste("sano keto")
+	// sayNamaste("Thule")
+	// sayFeriBhetaula("sano keto")
 
-	names := []string{"mario", "lungi", "yoshi", "peach", "bowser"}
+	cycleNames([]string{"Biththal", "Ronit d", "Nikhil d"}, sayNamaste)
 
-	for index, value := range names {
-		if index == 1 {
-			fmt.Println("continuing at pos", index)
-			continue
-		}
-		if index > 2 {
-			fmt.Println("breaking at pos", index)
-			break
-		}
+	a1 := circleArea(10.5)
+	a2 := circleArea(15)
 
-		fmt.Printf("the value at pos %v is %v \n", index, value)
-	}
-
+	fmt.Printf("%0.2f, %0.2f \n", a1, a2)
 }
