@@ -1,22 +1,34 @@
 package main
 
-import (
-	"fmt"
-	"sort"
-)
+import "fmt"
 
 func main() {
+	// x := 0
+	// for x < 5 {
+	// 	fmt.Println("X is: ", x)
+	// 	x++
+	// }
 
-	ages := []int{45, 20, 35, 30, 75, 60, 50, 25}
+	// for i := 0; i < 5; i++ {
+	// 	fmt.Println("value of i is: ", i)
+	// }
 
-	sort.Ints(ages)
-	fmt.Println(ages)
+	names := []string{"mario", "lungi", "yoshi", "peach"}
 
-	index := sort.SearchInts(ages, 30)
-	fmt.Println(index)
+	// for i := 0; i < len(names); i++ {
+	// 	fmt.Println(names[i])
+	// }
 
-	names := []string{"yoshi", "mario", "peach", "success", "biththal"}
+	// for index, value := range names {
+	// 	fmt.Printf("the value at index %v is %v \n", index, value)
+	// }
 
-	sort.Strings(names)
+	for _, value := range names {
+		fmt.Printf("the value is %v \n", value)
+		//this doesnot update the value in original slice.
+		value = "new string"
+	}
+
 	fmt.Println(names)
+
 }
