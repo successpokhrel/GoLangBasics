@@ -1,19 +1,32 @@
 package main
 
-import (
-	"fmt"
-)
-
-var score = 99.5
+import "fmt"
 
 func main() {
-	sayHello("success")
 
-	for _, v := range points {
-		fmt.Println(v)
+	menu := map[string]float64{
+		"soup":           4.99,
+		"pie":            7.99,
+		"salad":          6.99,
+		"toffee pudding": 3.55,
 	}
 
-	showScore()
-}
+	fmt.Println(menu)
+	fmt.Println(menu["toffee pudding"])
 
-// go run main.go greetings.go
+	//looping maps
+	for k, v := range menu {
+		fmt.Println(k, "-", v)
+	}
+
+	// ints as key type
+	phonebook := map[int]string{
+		267584967: "biththal",
+		546535453: "success",
+		654646454: "Siddhu",
+	}
+
+	fmt.Println(phonebook)
+	fmt.Println(phonebook[267584967])
+
+}
