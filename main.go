@@ -2,31 +2,26 @@ package main
 
 import "fmt"
 
+func updateName(x string) {
+	x = "dewge"
+}
+
+func updateNameTruePointer(x *string) {
+	*x = "dewge"
+}
+
 func main() {
+	// group A types -> strings, ints, bools, floats, arrays, structs
+	name := "fita"
 
-	menu := map[string]float64{
-		"soup":           4.99,
-		"pie":            7.99,
-		"salad":          6.99,
-		"toffee pudding": 3.55,
-	}
+	updateName(name)
 
-	fmt.Println(menu)
-	fmt.Println(menu["toffee pudding"])
+	m := &name
+	fmt.Println("memory address: ", m)
+	fmt.Println("value at memory address: ", *m)
 
-	//looping maps
-	for k, v := range menu {
-		fmt.Println(k, "-", v)
-	}
+	updateNameTruePointer(m)
 
-	// ints as key type
-	phonebook := map[int]string{
-		267584967: "biththal",
-		546535453: "success",
-		654646454: "Siddhu",
-	}
-
-	fmt.Println(phonebook)
-	fmt.Println(phonebook[267584967])
-
+	fmt.Println("memory address: ", m)
+	fmt.Println("value at memory address: ", *m)
 }
