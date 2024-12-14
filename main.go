@@ -1,77 +1,54 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-	"strconv"
-	"strings"
+	"math"
 )
 
-func getInput(prompt string, r *bufio.Reader) (string, error) {
-	fmt.Print(prompt)
-	input, err := r.ReadString('\n')
-
-	return strings.TrimSpace(input), err
+type shape interface {
+	area() float64
+	circumf() float64
 }
 
-func createBill() bill {
-	reader := bufio.NewReader(os.Stdin)
-
-	name, _ := getInput("Create a new bill name: ", reader)
-
-	b := newBill(name)
-
-	fmt.Println("Create the bill - ", b.name)
-
-	return b
+type square struct {
+	length float64
 }
 
-func promptOptions(b bill) {
-	reader := bufio.NewReader(os.Stdin)
+type circle struct {
+	radius float64
+}
 
-	opt, _ := getInput("Choose option (a - add item, s - save bill, t - add tip): ", reader)
+func (s square) area() float64 {
+	return s.length * s.length
+}
 
-	switch opt {
-	case "a":
-		name, _ := getInput("Item name: ", reader)
-		price, _ := getInput("Item price: ", reader)
+func (s square) circumf() float64 {
+	return s.length * 4
+}
 
-		p, err := strconv.ParseFloat(price, 64)
-		if err != nil {
-			fmt.Println("The price must be a number")
-			promptOptions(b)
-		}
+func (c circle) area() float64 {
+	return math.Pi * c.radius * c.radius
+}
 
-		b.addItem(name, p)
+func (c circle) circumf() float64 {
+	return 2 * math.Pi * c.radius
+}
 
-		fmt.Println("Item added - ", name, price)
-		promptOptions(b)
-	case "t":
-		tip, _ := getInput("Enter tip amount ($): ", reader)
-
-		t, err := strconv.ParseFloat(tip, 64)
-		if err != nil {
-			fmt.Println("The tip must be a number")
-			promptOptions(b)
-		}
-
-		b.updateTip(t)
-
-		fmt.Println("Tip added - ", tip)
-		promptOptions(b)
-	case "s":
-		b.save()
-		fmt.Println("you saved the file", b.name)
-	default:
-		fmt.Println("that was not a valid option...")
-		promptOptions(b)
-	}
+func printShapeInfo(s shape) {
+	fmt.Printf("area of %T is: %0.2f \n", s, s.area())
+	fmt.Printf("circumference of %T is: %0.2f \n", s, s.circumf())
 }
 
 func main() {
-	mybill := createBill()
-	promptOptions(mybill)
-}
+	shapes := []shape{
+		square{length: 15.2},
+		circle{radius: 7.5},
+		circle{radius: 12.3},
+		square{length: 4.9},
+	}
 
-// go run main.go bill.go
+	for _, v := range shapes {
+		printShapeInfo(v)
+		fmt.Println("---")
+	}
+}
